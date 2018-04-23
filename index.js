@@ -35,10 +35,12 @@ app.get('/extra', (req, res) => {
 MongoClient.connect(process.env.DATABASE_CONN, (err, db) => {
   const dbase = db.db('basic-crud');
   if (err) return console.log(err);
+
   // EXPRESS LISTEN SERVER
   app.listen(3000, () => {
     console.log('basic CRUD app listening on 3000...');
   });
+
   // POST ROUTE - CREATING AN ENTRY
   app.post('/name/add', (request, response, next) => {
     const name = {
@@ -52,6 +54,12 @@ MongoClient.connect(process.env.DATABASE_CONN, (err, db) => {
       response.send('name added successfully');
     });
   });
+
+  // GET ROUTE - READING ALL ENTRIES
+  app.get('/name', (request, response) => {
+    dbase.collection('name').find().toArray((err, result) => {
+      response.send(result);
+    });
+  });
   return true; // disable eslint error (consistent-return)
 });
-

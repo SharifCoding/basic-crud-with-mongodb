@@ -23,7 +23,7 @@ A route is simply an entry point into your application. So we are going to build
 
 If we put CRUD, Express and MongoDB together into a single diagram, this is what it would look like:
 
-![](./img/crud-express-mongo.png)
+![](./img/CrudExpressMongo.png)
 
 
 HTTP Verb |  Operation |
@@ -40,6 +40,7 @@ app.get('/', function(req, res) {
   res.send("Yep it's working");
 });
 ```
+![](./img/AddingFirstRoutes.png)
 ### Creating an Entry
 We'll use the POST HTTP verb to create a new entry in our database. Let's create our post route:
 ```js
@@ -58,7 +59,7 @@ app.post('/name/add', (req, res, next) => {
   });
 });
 ```
-![](./img/CreatingEntryPM.png)
+![](./img/CreatingEntry.png)
 ### Reading All Entries
 Now let's add a function to handle GET requests to our database in Express.
 ```js
@@ -68,6 +69,7 @@ app.get('/name', (req, res) => {
     });
 });
 ```
+![](./img/ReadingAllEntries.png)
 ### Reading by ID
 We can also make GET requests by id which is automatically assigned to entries in our database. We can add that id to our request via the URL. We can add an Express handler for this type of request like this:
 ```js
