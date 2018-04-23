@@ -58,6 +58,7 @@ app.post('/name/add', (req, res, next) => {
   });
 });
 ```
+![](./img/CreatingEntryPM.png)
 ### Reading All Entries
 Now let's add a function to handle GET requests to our database in Express.
 ```js
