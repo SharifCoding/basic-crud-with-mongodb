@@ -47,6 +47,7 @@ MongoClient.connect(process.env.DATABASE_CONN, (err, db) => {
       first_name: request.body.first_name,
       last_name: request.body.last_name,
     };
+    // db.collection.save() - inserts/updates a document
     dbase.collection('name').save(name, (err, result) => {
       if (err) {
         console.log(err);
@@ -57,6 +58,7 @@ MongoClient.connect(process.env.DATABASE_CONN, (err, db) => {
 
   // GET ROUTE - READING ALL ENTRIES
   app.get('/name', (request, response) => {
+    // db.collection.find() - selects and returns the selected documents
     dbase.collection('name').find().toArray((err, result) => {
       response.send(result);
     });
@@ -78,12 +80,25 @@ MongoClient.connect(process.env.DATABASE_CONN, (err, db) => {
 
   // PUT ROUTE - UPDATING BY ID
   app.put('/name/update/:id', (request, response, next) => {
-    const id = { _id: ObjectID(request.params.id) };
-    dbase.collection('name').update({ _id: id }, { $set: { first_name: request.body.first_name, last_name: request.body.last_name } }, (err, result) => {
+    const id = { _id: new ObjectID(request.params.id) };
+    // db.collection.update - modifies an existing document or documents in a collection
+    dbase.collection('name').update(id, { $set: { first_name: request.body.first_name, last_name: request.body.last_name } }, (err, result) => {
       if (err) {
         throw err;
       }
       response.send('user updated successfully');
+    });
+  });
+
+  // DELETE ROUTE - DELETING BY ID
+  app.delete('/name/delete/:id', (request, response, next) => {
+    const id = ObjectID(request.params.id);
+    // db.collection.deleteOne() - removes a single document from a collection
+    dbase.collection('name').deleteOne({ _id: id }, (err, result) => {
+      if (err) {
+        throw err;
+      }
+      response.send('user deleted');
     });
   });
 

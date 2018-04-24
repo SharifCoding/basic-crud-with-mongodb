@@ -121,3 +121,4 @@ app.delete('/name/delete/:id', (req, res, next) => {
     });
  });
 ```
+![](./img/DeleteIDChrome.png)
