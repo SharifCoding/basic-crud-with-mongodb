@@ -62,18 +62,28 @@ MongoClient.connect(process.env.DATABASE_CONN, (err, db) => {
     });
   });
 
-  // GET ROUTE - READING ALL ID
+  // GET ROUTE - READING BY ID
   app.get('/name/:id', (request, response, next) => {
     if (err) {
       throw err;
     }
-
     const id = ObjectID(request.params.id);
     dbase.collection('name').find(id).toArray((err, result) => {
       if (err) {
         throw err;
       }
       response.send(result);
+    });
+  });
+
+  // PUT ROUTE - UPDATING BY ID
+  app.put('/name/update/:id', (request, response, next) => {
+    const id = { _id: ObjectID(request.params.id) };
+    dbase.collection('name').update({ _id: id }, { $set: { first_name: request.body.first_name, last_name: request.body.last_name } }, (err, result) => {
+      if (err) {
+        throw err;
+      }
+      response.send('user updated successfully');
     });
   });
 

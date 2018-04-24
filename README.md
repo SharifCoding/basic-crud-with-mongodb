@@ -105,6 +105,7 @@ app.put('/name/update/:id', (req, res, next) => {
     });
 });
 ```
+![](./img/UpdatingID.png)
 ### Deleting by ID
 Finally, we've arrived at the last phase of this application: deleting entries by id. We will do this by using the DELETE request. Let's create a handler function in our application.
 ```js
