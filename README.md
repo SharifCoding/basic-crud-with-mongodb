@@ -59,7 +59,7 @@ app.post('/name/add', (req, res, next) => {
   });
 });
 ```
-![](./img/CreatingEntry.png)
+![](./img/CreatingEntryDB.png)
 ### Reading All Entries
 Now let's add a function to handle GET requests to our database in Express.
 ```js
@@ -88,6 +88,7 @@ app.get('/name/:id', (req, res, next) => {
     });
  });
 ```
+![](./img/ReadingID.png)
 ### Updating by ID
 We learned how to add data using a POST request and how to retrieve data using a GET request. Now we are going to add a handler to update an existing record by id using a PUT request:
 ```js

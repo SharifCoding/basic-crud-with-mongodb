@@ -61,5 +61,21 @@ MongoClient.connect(process.env.DATABASE_CONN, (err, db) => {
       response.send(result);
     });
   });
+
+  // GET ROUTE - READING ALL ID
+  app.get('/name/:id', (request, response, next) => {
+    if (err) {
+      throw err;
+    }
+
+    const id = ObjectID(request.params.id);
+    dbase.collection('name').find(id).toArray((err, result) => {
+      if (err) {
+        throw err;
+      }
+      response.send(result);
+    });
+  });
+
   return true; // disable eslint error (consistent-return)
 });
